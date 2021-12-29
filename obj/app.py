@@ -20,32 +20,32 @@ finally:
 
 
 class GUI:
-    
+
     def __init__(self, window):
 
         self.window = window
         Builder = Configuration(self.window)
+        Builder.set_StyleFont(("Arial", 12))
         Builder.define_window_features("String Enconder", 420, 200)
-    
 
 
         self.frame = LabelFrame(self.window)
         self.frame['text'] = "String Enconder"
-        Builder.set_style_properties(self.frame, "", "", ("Arial", 12))
+        Builder.set_style_properties(self.frame, "", "")
         self.frame.grid(row = 0, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
 
         self.lbl_texto = Label(self.frame)
         self.lbl_texto['text'] = "Texto:"
-        Builder.set_style_properties(self.lbl_texto, "", "", ("Arial", 12))
+        Builder.set_style_properties(self.lbl_texto, "", "")
         self.lbl_texto.grid(row = 1, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
 
         self.input_string = Entry(self.frame)
         self.input_string['text'] = "Texto:"
-        Builder.set_style_properties(self.input_string, "", "", ("Arial", 12))
+        Builder.set_style_properties(self.input_string, "", "")
         self.input_string.grid(row = 1, column = 2)
         self.input_string.focus()
 
@@ -53,28 +53,28 @@ class GUI:
 
         self.btn_convert = Button(self.frame)
         self.btn_convert['text'] = "Encriptar"
-        Builder.set_style_properties(self.btn_convert, "black", "white", ("Arial", 12))
+        Builder.set_style_properties(self.btn_convert, "black", "white")
         self.btn_convert['command'] = self.econde_str
         self.btn_convert.grid(row = 2, column = 0, columnspan = 5, sticky = W + E)
 
 
 
         self.lbl_encrypt_str = Label(self.frame)
-        Builder.set_style_properties(self.lbl_encrypt_str, "auto", "", ("Arial", 12))
+        Builder.set_style_properties(self.lbl_encrypt_str, "auto", "")
         self.lbl_encrypt_str.grid(row = 3, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
 
         self.btn_copy = Button(self.frame)
         self.btn_copy['text'] = "Copiar"
-        Builder.set_style_properties(self.btn_copy, "black", "white", ("Arial", 12))
+        Builder.set_style_properties(self.btn_copy, "black", "white")
         self.btn_copy['command'] = self.copy_to_clipboard
         self.btn_copy.grid(row = 4, column = 0, columnspan = 5, sticky = W + E)
 
 
         self.btn_copy = Button(self.frame)
         self.btn_copy['text'] = "Limpiar"
-        Builder.set_style_properties(self.btn_copy, "black", "white", ("Arial", 12))
+        Builder.set_style_properties(self.btn_copy, "black", "white")
         self.btn_copy['command'] = self._clean_all
         self.btn_copy.grid(row = 5, column = 0, columnspan = 5, sticky = W + E)
 
@@ -114,7 +114,7 @@ class GUI:
         self.btn_copy['bg'] = "black"
         self.btn_copy['fg'] = "white"
         self.btn_copy.grid(row = 4, column = 0, columnspan = 5, sticky = W + E)
-        self.btn_copy['command'] = 
+        self.btn_copy['command'] =
 
 
         self.btn_copy = Button(self.window)
@@ -123,16 +123,16 @@ class GUI:
         self.btn_copy['bg'] = "black"
         self.btn_copy['fg'] = "white"
         self.btn_copy.grid(row = 5, column = 0, columnspan = 5, sticky = W + E)
-        self.btn_copy['command'] = 
-    
+        self.btn_copy['command'] =
+
         '''
-        
+
 
     def random_color(self, obj = None):
         list_values = []
         for i in range(0, 256):
             list_values.append(i)
-            
+
         r = random.choice(list_values)
         g = random.choice(list_values)
         b = random.choice(list_values)
@@ -163,17 +163,17 @@ class GUI:
 
 
         for char in list_chars:
-            
+
             ascii_value = ord(char)
             ascii_value = str(ascii_value)
-            
+
             if int(ascii_value) <= 99:
 
-                ascii_value = "0" + ascii_value  
+                ascii_value = "0" + ascii_value
                 ascii_value = str(ascii_value)
 
 
-            
+
             enconde_string += ascii_value + "&!%/"
             #ascii_value = ascii_value[::-1]
         #*****************************
@@ -182,8 +182,8 @@ class GUI:
         if int(len_str) <= 99:
 
             len_str = str(len_str)
-            len_str = "0" + len_str  
-            
+            len_str = "0" + len_str
+
 
         enconde_string += "#/?{0}#/?".format(len_str)
 
@@ -192,8 +192,8 @@ class GUI:
 
 
         #text_entry = StringVar(enconde_string)
-        
-  
+
+
         #self.str_encode.textvariable = enconde_string
         #print(enconde_string)
         self.econde_str = enconde_string
@@ -210,4 +210,3 @@ class GUI:
     def _clean_all(self):
         self.input_string.delete('0', END)
         self.lbl_encrypt_str["text"] = ""
-        
