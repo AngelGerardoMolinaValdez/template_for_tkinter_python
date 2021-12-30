@@ -31,21 +31,21 @@ class GUI:
 
         self.frame = LabelFrame(self.window)
         self.frame['text'] = "String Enconder"
-        Builder.set_style_properties(self.frame, "", "")
+        Builder.set_style_properties(self.frame)
         self.frame.grid(row = 0, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
 
         self.lbl_texto = Label(self.frame)
         self.lbl_texto['text'] = "Texto:"
-        Builder.set_style_properties(self.lbl_texto, "", "")
+        Builder.set_style_properties(self.lbl_texto)
         self.lbl_texto.grid(row = 1, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
 
         self.input_string = Entry(self.frame)
         self.input_string['text'] = "Texto:"
-        Builder.set_style_properties(self.input_string, "", "")
+        Builder.set_style_properties(self.input_string)
         self.input_string.grid(row = 1, column = 2)
         self.input_string.focus()
 
@@ -60,7 +60,7 @@ class GUI:
 
 
         self.lbl_encrypt_str = Label(self.frame)
-        Builder.set_style_properties(self.lbl_encrypt_str, "auto", "")
+        Builder.set_style_properties(self.lbl_encrypt_str, "auto")
         self.lbl_encrypt_str.grid(row = 3, column = 0, columnspan = 1, pady = 0, padx = 0)
 
 
