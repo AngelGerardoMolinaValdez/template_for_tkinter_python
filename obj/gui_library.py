@@ -1,11 +1,10 @@
 class Configuration:
 
+    StyleFont = tuple()
+
 
     def __init__(self, obj_form):
-        self.obj_form  = obj_form
-
-    def set_StyleFont(self, StyleFont):
-        self.StyleFont = StyleFont
+        self.obj_form = obj_form
 
     '''
 ---------------------------------------------------------------------------------------------------------
@@ -29,8 +28,8 @@ class Configuration:
 ---------------------------------------------------------------------------------------------------------
     '''
     def define_window_features(self, title, width, height, bg_color = "", center_window = True, resizable = False, tranparency_yes = False, path_icon = None):
-
-        #self._get_data_window()
+        
+        self._get_data_window()
 
         if len(title) > 1:
             try:
@@ -62,7 +61,7 @@ class Configuration:
             self.obj_form.geometry(posicion)
         else:
             self.obj_form.geometry(width, height)
-
+        
 
         if resizable:
             self.obj_form.resizable(0,0)
@@ -80,7 +79,7 @@ class Configuration:
     Descripcion:    Define las configuraciones de un objeto de la clase Tkinter
 
     Argumentos:
-                    obj_tag                     =   Es el objeto en el que se van a realizar las configuraciones
+                    obj_tag                     =   Es el objeto en el que se van a realizar las configuraciones 
                     bg_color                    =   Es el color del fondo de la ventana
                     fg_color                    =   Es el color de la letra de la ventana
                     tuple_style_letter          =   Contiene una tupla de datos con la informacion referente al tipo de letra
@@ -94,35 +93,36 @@ class Configuration:
 
     def set_style_properties(self, obj_tag, bg_color = None, fg_color = None):
         try:
-            if bg_color is not None:
-                if bg_color.lower() == 'auto':
-                    ran_bg = self._get_auto_bg()
-                    obj_tag['bg'] = ran_bg
-                else:
-                    obj_tag['bg'] = bg_color
+                
+            if bg_color.lower() == 'auto':
+                ran_bg = self._get_auto_bg() 
+                obj_tag['bg'] = ran_bg
+
+            elif len(bg_color) > 1 and  bg_color.lower() != 'auto':
+                obj_tag['bg'] = bg_color 
 
         except Exception as E_fail_property_bg:
-            print(f"Error al asignar la propiedad: bg en el objeto: {obj_tag}, excepcion: {E_fail_property_bg}")
+            print(f"Error al asignar la propiedad: bg en el objeto: {type_tag}, excepcion: {E_fail_property_bg}")
 
 
 
         try:
-            if fg_color is not None:
+            if len(fg_color) > 1:
                 obj_tag['fg'] = fg_color
-            else:
+            elif len(bg_color) > 1 and len(fg_color) < 1:
                 self._define_auto_fg(obj_tag, tuple_colors)
 
         except Exception as E_fail_property_fg:
-            print(f"Error al asignar la propiedad: fg en el objeto: {obj_tag}, excepcion: {E_fail_property_fg}")
+            print(f"Error al asignar la propiedad: fg en el objeto: {type_tag}, excepcion: {E_fail_property_fg}")
 
 
 
         try:
-            if self.StyleFont is not None:
-                obj_tag['font'] = self.StyleFont
+            if tuple_style_letter != None:
+                obj_tag['font'] = StyleFont
 
         except Exception as E_fail_property_font:
-            print(f"Error al asignar la propiedad: font en el objeto: {obj_tag}, excepcion: {E_fail_property_font}")
+            print(f"Error al asignar la propiedad: font en el objeto: {type_tag}, excepcion: {E_fail_property_font}")
 
 
         #self.obj_form.grid(dict_grid)
@@ -134,7 +134,7 @@ class Configuration:
     Descripcion:    Define laa ubicaciones de un objeto de la clase Tkinter
 
     Argumentos:
-                    obj_tag                     =   Es el objeto en el que se van a realizar las configuraciones
+                    obj_tag                     =   Es el objeto en el que se van a realizar las configuraciones 
                     fg_color                    =   Es el color de la letra de la ventana
                     bg_color                    =   Es el color del fondo de la ventana
                     tuple_style_letter          =   Contiene una tupla de datos con la informacion referente al tipo de letra
@@ -155,13 +155,14 @@ class Configuration:
         list_values = []
         for i in range(0, 256):
             list_values.append(i)
-
+            
         r = random.choice(list_values)
         g = random.choice(list_values)
         b = random.choice(list_values)
         RGB = (r, g, b)
 
         return "#%02x%02x%02x" % RGB
+
 
     def _define_auto_fg(self, obj, tuple_rgb_bg):
 
@@ -175,7 +176,7 @@ class Configuration:
         else:
             obj['fg'] = "black"
 
-    '''
+
     def _get_data_window(self):
             type_tag = self.obj_form.winfo_class()
             print(f"Clase: {type_tag}")
@@ -191,4 +192,20 @@ class Configuration:
 
             visuals = self.obj_form.winfo_visualsavailable()
             print(f"Celdas: {visuals}")
-    '''
+             
+        #Este metodo retorna la clase del objeto que se pasa por parametro, es decir
+    #si pasamos un label el resultado sera un label, si ingresamos un input la clase sera input, etc
+    type_tag = obj_tag.winfo_class()
+    #print(f"La clase del objeto ingresado es: {type_tag}")
+
+    #Este metodo retornara informacion referente al ancho de la ventana ingresada
+    screen_width = self.obj_form.winfo_screenwidth()
+    #print(f"el ancho del objeto ingresado es: {screen_width}")
+
+    #Este metodo retornara informacion referente a la altura de la ventana ingresada
+    screen_height = self.obj_form.winfo_screenheight()
+    #print(f"La altura del objeto ingresado es: {screen_height}")
+
+    #pendiente de validacion
+    window = self.obj_form.winfo_cells()
+    #print(f"El numero de celdas dentro del objeto ingresado son: {window}")        

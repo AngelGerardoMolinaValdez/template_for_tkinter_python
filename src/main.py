@@ -1,6 +1,6 @@
-if __name__ == "__main__":
+fif __name__ == "__main__":
 
-    import sys
+    import sys, os
     sys.path.insert(0, '../')
 
     try:
@@ -19,6 +19,6 @@ if __name__ == "__main__":
 
 # **************************************************
     Form = Tk()
-    EncondeEncripter = GUI(Form)
+    desing_test_gui = GUI(Form)
     Form.mainloop()
 # **************************************************
